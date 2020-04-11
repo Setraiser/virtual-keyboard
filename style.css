@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+.textarea {
+    width: 60%;
+    height: 300px;
+    scroll-behavior: auto;
+    margin: 0 auto;
+}
+
+.keyboardContainer {
+    width: 53%;
+    margin-top: 5%;
+    height: auto;
+    border: 1px solid #000;
+    display: flex;
+    padding: 20px;
+    flex-wrap: wrap;
+    background-color: #000;
+}
+
+.key {
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    margin: 0 5px 5px 10px;
+    display: inline-block;
+    border: 1px solid #d2d2d2ed;
+    color: #fff;
+    background-color: slategrey;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.key-active {
+    background-color: #3a424a;
+    transition: 0.2s ease-in-out;
+}
+
+.ctrl {
+    width:  45px;
+}
+
+.tab {
+    width: 60px;
+}
+
+.backspace {
+    width: 100px;
+}
+
+.del {
+    width: 23px;
+}
+
+.capslock {
+    width: 100px;
+}
+.enter {
+    width: 115px;
+}
+.shift {
+    width: 108px;
+}
+
+.space {
+    width: 366px;
+}
+
+
+.notice {
+    color: #fff;
+    margin-top: 10px;
+    font-size: 16px;
+}
