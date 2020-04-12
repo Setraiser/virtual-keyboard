@@ -9,6 +9,11 @@
     textarea.focus();
     document.body.appendChild(keyboardContainer);
 
+    if (localStorage.getItem('language') === null) {
+        localStorage.setItem('language', 'en');
+    }
+
+    let language = localStorage.getItem('language');
     
 
 
@@ -29,7 +34,7 @@
         'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '|', 'Del',
         'CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"', 'Enter',
         'Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', '⇑', 'Shift',
-        'Ctrl', 'Win', 'AltLeft', 'Space', 'Alt', 'Ctrl', '⇐', '⇓', '⇒'
+        'Ctrl', 'Win', 'Alt', 'Space', 'Alt', 'Ctrl', '⇐', '⇓', '⇒'
     ];
 
     const enLangCapsLayout = [
@@ -67,14 +72,10 @@
 
     
 
-    if (localStorage.getItem('language') === undefined) {
-        localStorage.setItem('language', 'en');
-    }
-
-    let language = localStorage.getItem('language');
+    
   
-
-    let currentKeysLayout = (language) ? enLangLayout : ruLangLayout;
+    
+    let currentKeysLayout = (language === 'en') ? enLangLayout : ruLangLayout;
 
     keyboardKeysCodes.map((item, idx) => {
         let keyBlock = document.createElement('div');
@@ -122,19 +123,12 @@
         }
     })
     
-    function languageToggle(currentKeysLayout) {
-        if (localStorage.getItem('language') === 'en') {
-            localStorage.setItem('language', 'ru');
-            currentKeysLayout = ruLangLayout;
-            console.log(localStorage.getItem('language'));
-
-        } else if (localStorage.getItem('language') === 'ru') {
-            localStorage.setItem('language', 'en');
-            currentKeysLayout = enLangLayout;
-            console.log(localStorage.getItem('language'));
-        }
+    function languageToggle(lang, currentKeysLayout) {
+        lang === 'en' ? localStorage.setItem('language', 'ru') : localStorage.setItem('language', 'en');
+        currentKeysLayout = (lang === 'en') ? enLangLayout : ruLangLayout;
         
         let currentKeys = [...document.querySelectorAll('.key')];
+        console.log('toggle lang');
         currentKeys.map((item, idx) => {
             item.textContent = currentKeysLayout[idx];
         });
@@ -148,10 +142,10 @@
         
         if (caps === false) {
             caps = true;
-            currentKeysLayout = (lang) ? enLangCapsLayout : ruLangCapsLayout;
+            currentKeysLayout = (lang !== 'en') ? enLangCapsLayout : ruLangCapsLayout;
         } else if (caps === true) {
             caps = false;
-            currentKeysLayout = (lang) ? enLangLayout : ruLangLayout;
+            currentKeysLayout = (lang !== 'en') ? enLangLayout : ruLangLayout;
         }
         let currentKeys = [...document.querySelectorAll('.key')];
         currentKeys.map((item, idx) => {
@@ -163,10 +157,10 @@
 
         if (shift === false) {
             shift = true;
-            currentKeysLayout = (lang === 'en') ? enLangShiftLayout : ruLangShiftLayout;
+            currentKeysLayout = (lang !== 'en') ? enLangShiftLayout : ruLangShiftLayout;
         } else if (shift === true) {
             shift = false;
-            currentKeysLayout = (lang === 'en') ? enLangLayout : ruLangLayout;
+            currentKeysLayout = (lang !== 'en') ? enLangLayout : ruLangLayout;
             
         }
 
@@ -286,7 +280,7 @@
                     textarea.value = textarea.value.slice(0,-1);
                 break;
                 case 'CapsLock':
-                    capsToggle(localStorage.getItem('language'), currentKeysLayout);
+                    capsToggle(language, currentKeysLayout);
                 break;
                 default:
                     textarea.value += target.textContent;
