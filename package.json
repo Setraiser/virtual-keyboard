@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Setraiser/virtual-keyboard/issues"
   },
-  "homepage": "https://github.com/Setraiser/virtual-keyboard#readme"
+  "homepage": "https://github.com/Setraiser/virtual-keyboard#readme",
+  "devDependencies": {
+    "eslint-config-airbnb": "^18.1.0"
+  }
 }
